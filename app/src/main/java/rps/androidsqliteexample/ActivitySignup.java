@@ -23,7 +23,7 @@ public class ActivitySignup extends BaseActivity {
            @Override
            public void onClick(View v) {
                if(isValid("ActivitySignup")){
-
+            //hello
                }
            }
        });
