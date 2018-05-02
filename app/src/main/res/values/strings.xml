@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">AndroidSQLiteExample</string>
+    <string name="usrname">UserName</string>
+    <string name="psw">Password</string>
+    <string name="email">Email</string>
+    <string name="mobile">Mobile</string>
+    <string name="city">City</string>
+    <string name="cpsw">Confirm Password</string>
+    <string name="notsignup">Not Yet Account?</string>
+    <string name="signup">SignUp</string>
+    <string name="login">Login</string>
+    <string name="entuser">Enter UserName</string>
+    <string name="entpsw">Enter Password</string>
+    <string name="lpsw">Password must be greater then 6</string>
+    <string name="entemail">Enter Email</string>
+    <string name="entvemail">Enter Valid Email</string>
+    <string name="entmobile">Enter Valid Mobile</string>
+    <string name="entvmobile">Enter Currect Mobile Number</string>
+    <string name="cvpsw">Password does\'t Match</string>
+    <string name="entcity">Enter City</string>
+    <string name="entcpsw">Enter Confirm Password</string>
+</resources>
