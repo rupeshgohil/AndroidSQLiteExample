@@ -1,4 +1,4 @@
-package rps.androidsqliteexample;
+package rps.androidsqliteexample.Utility;
 
 public class utility {
     public static final String isActivity = "activity";

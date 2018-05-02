@@ -1,16 +1,14 @@
 package rps.androidsqliteexample;
 
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Patterns;
 import android.widget.Toast;
 
 import java.util.regex.Pattern;
 
 import static rps.androidsqliteexample.ActivitySignup.mActivitySignupBinding;
 import static rps.androidsqliteexample.MainActivity.mainBinding;
-import static rps.androidsqliteexample.utility.EMAIL_PATTERN;
+import static rps.androidsqliteexample.Utility.utility.EMAIL_PATTERN;
 
 public class BaseActivity extends AppCompatActivity {
 
