@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_selectimagegallery"
+                android:layout_width="60dp"
+                app:civ_border_color="@color/colorAccent"
+                android:layout_height="60dp"
+                android:src="@mipmap/gallery"
+                app:civ_border_width="1dp"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:text="@string/gallery"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textStyle="italic"
+                android:textSize="20sp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginLeft="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                       android:id="@+id/iv_selectimagecamra"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@mipmap/ic_camera"
+                        app:civ_border_color="@color/colorAccent"
+                        app:civ_border_width="1dp"/>
+                    <android.support.v7.widget.AppCompatTextView
+                        android:text="@string/camera"
+                        android:textColor="@android:color/holo_blue_dark"
+                        android:textStyle="italic"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -19,4 +19,6 @@
     <string name="cvpsw">Password does\'t Match</string>
     <string name="entcity">Enter City</string>
     <string name="entcpsw">Enter Confirm Password</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
 </resources>
