@@ -70,17 +70,20 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:id="@+id/radiogroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <android.support.v7.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:id="@+id/rbMale"
                     android:checked="false"
+                    android:text="Male"
                     android:layout_height="wrap_content" />
                 <android.support.v7.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:id="@+id/rbFemale"
                     android:checked="false"
+                    android:text="Female"
                     android:layout_height="wrap_content" />
             </RadioGroup>
         </LinearLayout>

@@ -21,4 +21,6 @@
     <string name="entcpsw">Enter Confirm Password</string>
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
+    <string name="vimg">Please Select Image from Gallery or Camera</string>
+    <string name="vgender">Please Select Gender Male or Female</string>
 </resources>

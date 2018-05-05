@@ -12,15 +12,16 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.regex.Pattern;
 
+import static rps.androidsqliteexample.ActivitySignup.gender;
+import static rps.androidsqliteexample.ActivitySignup.imageInByte;
 import static rps.androidsqliteexample.ActivitySignup.mActivitySignupBinding;
 import static rps.androidsqliteexample.MainActivity.mainBinding;
-import static rps.androidsqliteexample.Utility.utility.EMAIL_PATTERN;
-import static rps.androidsqliteexample.Utility.utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE;
+import static rps.androidsqliteexample.Utility.Utility.EMAIL_PATTERN;
+import static rps.androidsqliteexample.Utility.Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -69,6 +70,12 @@ public class BaseActivity extends AppCompatActivity {
                 return false;
             }else if(!mActivitySignupBinding.edPassword.getText().toString().trim().equals(mActivitySignupBinding.edCPassword.getText().toString().trim())){
                 Toast.makeText(this, R.string.cvpsw, Toast.LENGTH_SHORT).show();
+                return false;
+            }else if(imageInByte == null){
+                Toast.makeText(this, R.string.vimg, Toast.LENGTH_SHORT).show();
+                return false;
+            }else if(TextUtils.isEmpty(gender)){
+                Toast.makeText(this, R.string.vgender, Toast.LENGTH_SHORT).show();
                 return false;
             }else{
                 return true;
