@@ -27,9 +27,11 @@ public class MainActivity extends BaseActivity {
         mainBinding.btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isValid("MainActivity")){
+                Intent i = new Intent(MainActivity.this,ActivityView.class);
+                startActivity(i);
+               /* if(isValid("MainActivity")){
                     Log.e("call","call");
-                }
+                }*/
             }
         });
     }

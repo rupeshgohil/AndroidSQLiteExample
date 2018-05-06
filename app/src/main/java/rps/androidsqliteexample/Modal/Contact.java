@@ -8,7 +8,16 @@ public class Contact {
     public String mobile;
     public String city;
     public String password;
+    public String date;
     public byte[] image;
+    int id;
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getCity() {
         return city;
@@ -64,5 +73,12 @@ public class Contact {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    public int getId(){
+        return id;
     }
 }

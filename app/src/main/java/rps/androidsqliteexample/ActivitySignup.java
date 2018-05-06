@@ -2,6 +2,7 @@ package rps.androidsqliteexample;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,15 +21,19 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import rps.androidsqliteexample.Database.LocalDataBase;
 import rps.androidsqliteexample.Modal.Contact;
 import rps.androidsqliteexample.databinding.ActivitySignupBinding;
 
-import static rps.androidsqliteexample.Utility.Utility.REQUEST_CAMERA;
-import static rps.androidsqliteexample.Utility.Utility.SELECTIMAGE;
-import static rps.androidsqliteexample.Utility.Utility.SELECT_FILE;
+import static rps.androidsqliteexample.Utility.utility.REQUEST_CAMERA;
+import static rps.androidsqliteexample.Utility.utility.SELECTIMAGE;
+import static rps.androidsqliteexample.Utility.utility.SELECT_FILE;
 
 public class ActivitySignup extends BaseActivity {
     public static ActivitySignupBinding mActivitySignupBinding;
@@ -37,6 +43,8 @@ public class ActivitySignup extends BaseActivity {
     Long insertResponse;
     public static String gender;
     public static byte[] imageInByte;
+    public int mYear,mDay,mMonth;
+    public static String SelectDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,9 +72,11 @@ public class ActivitySignup extends BaseActivity {
                     mContact.setCity(mActivitySignupBinding.edCity.getText().toString().trim());
                     mContact.setPassword(mActivitySignupBinding.edPassword.getText().toString().trim());
                     mContact.setGender(gender);
+                    mContact.setDate(mActivitySignupBinding.edDate.getText().toString().trim());
                     mContact.setImage(imageInByte);
                    insertResponse = db.InsertData(mContact);
                    if(insertResponse >0){
+                       Log.e("insert","InsertSucess");
                        Toast.makeText(mContext, "Insert Success", Toast.LENGTH_SHORT).show();
                        Intent i = new Intent(ActivitySignup.this,MainActivity.class);
                        startActivity(i);
@@ -114,6 +124,34 @@ public class ActivitySignup extends BaseActivity {
 
                AlertDialog b = dialogBuilder.create();
                b.show();
+           }
+       });
+       mActivitySignupBinding.ivDate.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               final Calendar c = Calendar.getInstance();
+               mYear = c.get(Calendar.YEAR);
+               mMonth = c.get(Calendar.MONTH);
+               mDay = c.get(Calendar.DAY_OF_MONTH);
+               DatePickerDialog datePickerDialog = new DatePickerDialog(ActivitySignup.this,
+                       new DatePickerDialog.OnDateSetListener() {
+
+                           @Override
+                           public void onDateSet(DatePicker view, int year,
+                                                 int monthOfYear, int dayOfMonth) {
+                               Calendar cal = Calendar.getInstance();
+                               cal.setTimeInMillis(0);
+                               cal.set(year, monthOfYear, dayOfMonth, 0, 0, 0);
+                               Date chosenDate = cal.getTime();
+                               DateFormat df_medium_us = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.UK);
+                               SelectDate = df_medium_us.format(chosenDate);
+                              // Log.e("Date1",df_medium_us_str);
+                               //SelectDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                               Log.e("Date2",SelectDate);
+                               mActivitySignupBinding.edDate.setText(SelectDate);
+                           }
+                       }, mYear, mMonth, mDay);
+               datePickerDialog.show();
            }
        });
     }

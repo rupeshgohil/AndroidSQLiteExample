@@ -12,11 +12,14 @@ public class databaseconfig {
     public static final String EMAIL = "Email";
     public static final String MOBILE = "Mobile";
     public static final String CITY = "City";
+    public static final String DATE = "Date";
     public static final String PASSWORD = "Password";
     public static final String IMAGE = "Image";
+    public static int Count=0;
 
     public static String SELECTTABLE =  "CREATE TABLE " + TABLENAME + "("
             + ID + " INTEGER PRIMARY KEY," + USERNAME + " TEXT,"
             + GENDER + " TEXT," + EMAIL + " TEXT,"
-            + MOBILE + " TEXT,"+ CITY + " TEXT," + PASSWORD + " TEXT,"+ IMAGE + " BLOB" + ")";
+            + MOBILE + " TEXT,"+ DATE + " TEXT,"+ CITY + " TEXT," + PASSWORD + " TEXT,"+ IMAGE + " BLOB" + ")";
+    public static String getAllRecords = "SELECT * FROM "+TABLENAME;
 }
