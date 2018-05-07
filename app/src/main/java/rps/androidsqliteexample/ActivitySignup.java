@@ -45,6 +45,8 @@ public class ActivitySignup extends BaseActivity {
     public static byte[] imageInByte;
     public int mYear,mDay,mMonth;
     public static String SelectDate;
+    AlertDialog.Builder dialogBuilder;
+    AlertDialog mDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +93,7 @@ public class ActivitySignup extends BaseActivity {
        mActivitySignupBinding.ivSelectimage.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ActivitySignup.this);
+               dialogBuilder = new AlertDialog.Builder(ActivitySignup.this);
                dialogBuilder.setMessage("Choose Image");
                dialogBuilder.setCancelable(true);
                LayoutInflater inflater = ActivitySignup.this.getLayoutInflater();
@@ -104,6 +106,7 @@ public class ActivitySignup extends BaseActivity {
                    public void onClick(View v) {
                        if(isStoragePermissionGranted(mContext)){
                            OpenImageGallery();
+                           mDialog.dismiss();
                        }
 
                    }
@@ -113,6 +116,7 @@ public class ActivitySignup extends BaseActivity {
                    public void onClick(View v) {
                        if(isStoragePermissionGranted(mContext)){
                            OpenImageCamera();
+                           mDialog.dismiss();
                        }
 
                    }
@@ -123,8 +127,8 @@ public class ActivitySignup extends BaseActivity {
                    }
                });
 
-               AlertDialog b = dialogBuilder.create();
-               b.show();
+               mDialog = dialogBuilder.create();
+               mDialog.show();
            }
        });
        mActivitySignupBinding.ivDate.setOnClickListener(new View.OnClickListener() {

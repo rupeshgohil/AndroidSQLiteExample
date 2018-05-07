@@ -1,12 +1,15 @@
 package rps.androidsqliteexample;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -14,6 +17,7 @@ import java.util.ArrayList;
 
 import rps.androidsqliteexample.Adapter.LocalContactAdapter;
 import rps.androidsqliteexample.Database.LocalDataBase;
+import rps.androidsqliteexample.Interface.onClick;
 import rps.androidsqliteexample.Modal.Contact;
 import rps.androidsqliteexample.databinding.ActivityViewBinding;
 
@@ -43,6 +47,30 @@ public class ActivityView extends BaseActivity {
         progress.setIndeterminate(true);
         progress.show();
         mAdapter = new LocalContactAdapter(ActivityView.this,arrayList);
+        mAdapter.setListener(new onClick() {
+            @Override
+            public void onItemClick(int position) {
+                    Contact mc = arrayList.get(position);
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(ActivityView.this);
+                dialog.setTitle(mc.getUsername());
+                dialog.setMessage("Are you want to Delete or Update this User..");
+                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),"delete",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dialog.setNegativeButton("Update", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),"update",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                dialog.show();
+            }
+        });
         mActivityViewBinding.recyclerview.setAdapter(mAdapter);
         if(arrayList.size() > 0){
             Log.e("TotalRow",String.valueOf(Count));
