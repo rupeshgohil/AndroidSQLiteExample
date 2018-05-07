@@ -30,22 +30,23 @@ public class ActivityView extends BaseActivity {
         mActivityViewBinding = DataBindingUtil.setContentView(this,R.layout.activity_view);
         db = new LocalDataBase(this);
         arrayList =  db.GetAllRecords();
+        Log.e("array===>","===>"+new Gson().toJson(arrayList));
         mActivityViewBinding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         mActivityViewBinding.recyclerview.setHasFixedSize(false);
         mActivityViewBinding.recyclerview.addItemDecoration(new DividerItemDecoration(ActivityView.this,1));
         setAdapter();
     }
     public void setAdapter(){
-       /* final ProgressDialog progress = new ProgressDialog(this);
+       final ProgressDialog progress = new ProgressDialog(this);
         progress.setMessage("Please wait... ");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.setIndeterminate(true);
-        progress.show();*/
+        progress.show();
         mAdapter = new LocalContactAdapter(ActivityView.this,arrayList);
         mActivityViewBinding.recyclerview.setAdapter(mAdapter);
         if(arrayList.size() > 0){
             Log.e("TotalRow",String.valueOf(Count));
-            //progress.dismiss();
+            progress.dismiss();
         }
     }
 }

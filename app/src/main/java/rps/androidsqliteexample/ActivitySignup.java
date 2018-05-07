@@ -75,14 +75,15 @@ public class ActivitySignup extends BaseActivity {
                     mContact.setDate(mActivitySignupBinding.edDate.getText().toString().trim());
                     mContact.setImage(imageInByte);
                    insertResponse = db.InsertData(mContact);
-                   if(insertResponse >0){
+                   if(insertResponse == -1){
+                       Toast.makeText(mContext, "Fail", Toast.LENGTH_SHORT).show();
+                   }else{
                        Log.e("insert","InsertSucess");
                        Toast.makeText(mContext, "Insert Success", Toast.LENGTH_SHORT).show();
                        Intent i = new Intent(ActivitySignup.this,MainActivity.class);
                        startActivity(i);
                        finish();
-                   }else{
-                       Toast.makeText(mContext, "Fail", Toast.LENGTH_SHORT).show();
+
                    }
                }
            }

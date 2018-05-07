@@ -116,4 +116,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="loginfalis">UserName and Password increct please check..</string>
+    <string name="vuser">Username allready exist..</string>
+    <string name="vluser">Username not exist please check username or signup</string>
 </resources>

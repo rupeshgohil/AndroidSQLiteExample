@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import java.util.regex.Pattern;
 
+import rps.androidsqliteexample.Database.LocalDataBase;
+
 import static rps.androidsqliteexample.ActivitySignup.SelectDate;
 import static rps.androidsqliteexample.ActivitySignup.gender;
 import static rps.androidsqliteexample.ActivitySignup.imageInByte;
@@ -25,7 +27,7 @@ import static rps.androidsqliteexample.Utility.utility.EMAIL_PATTERN;
 import static rps.androidsqliteexample.Utility.utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE;
 
 public class BaseActivity extends AppCompatActivity {
-
+    LocalDataBase db = new LocalDataBase(this);
     public boolean isValid(String str){
         if(str.equals("MainActivity")){
             if(mainBinding.edmainusername.length() == 0){
@@ -81,6 +83,9 @@ public class BaseActivity extends AppCompatActivity {
             }else if(TextUtils.isEmpty(SelectDate)){
                 Toast.makeText(this, R.string.vdate, Toast.LENGTH_SHORT).show();
                     return false;
+            }else if(!db.checkUserName(mActivitySignupBinding.edUserName.getText().toString().trim())){
+                Toast.makeText(this, R.string.vuser, Toast.LENGTH_SHORT).show();
+                return false;
             }else{
                 return true;
             }

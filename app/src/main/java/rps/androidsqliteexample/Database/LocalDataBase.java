@@ -17,6 +17,7 @@ import static rps.androidsqliteexample.Utility.databaseconfig.DATABASEVERSION;
 import static rps.androidsqliteexample.Utility.databaseconfig.DATE;
 import static rps.androidsqliteexample.Utility.databaseconfig.EMAIL;
 import static rps.androidsqliteexample.Utility.databaseconfig.GENDER;
+import static rps.androidsqliteexample.Utility.databaseconfig.ID;
 import static rps.androidsqliteexample.Utility.databaseconfig.IMAGE;
 import static rps.androidsqliteexample.Utility.databaseconfig.MOBILE;
 import static rps.androidsqliteexample.Utility.databaseconfig.PASSWORD;
@@ -92,5 +93,49 @@ public class LocalDataBase extends SQLiteOpenHelper{
         }
 
         return arraylist;
+    }
+
+    public boolean isLogin(String email, String password) {
+        String[] columns = {ID};
+        SQLiteDatabase db = this.getReadableDatabase();
+        String slect = USERNAME + " = ?" + " AND " + PASSWORD + " = ?";
+        String[] selectargument = {email,password};
+        mCursor = db.query(TABLENAME,columns,slect,selectargument,null,null,null);
+        int count = mCursor.getCount();
+        mCursor.close();
+        db.close();
+        if(count == 0){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkUserName(String username) {
+        String[] clomnsid = {ID};
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] arg_user = {username};
+        String select = USERNAME +" = ?";
+        mCursor = db.query(TABLENAME,clomnsid,select,arg_user,null,null,null);
+        int count = mCursor.getCount();
+        mCursor.close();
+        db.close();
+        if(count == 0){
+            return true;
+        }
+        return false;
+    }
+    public boolean checkUserNameLogin(String username) {
+        String[] clomnsid = {ID};
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] arg_user = {username};
+        String select = USERNAME +" = ?";
+        mCursor = db.query(TABLENAME,clomnsid,select,arg_user,null,null,null);
+        int count = mCursor.getCount();
+        mCursor.close();
+        db.close();
+        if(count == 0){
+            return false;
+        }
+        return true;
     }
 }
