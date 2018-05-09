@@ -1,6 +1,8 @@
 package rps.androidsqliteexample.Modal;
 
-public class Contact {
+import java.io.Serializable;
+
+public class Contact implements Serializable{
 
     public String username;
     public String gender;

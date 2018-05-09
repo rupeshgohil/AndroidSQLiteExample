@@ -39,6 +39,19 @@
                 android:hint="@string/psw"
                 android:inputType="textWebPassword" />
         </android.support.design.widget.TextInputLayout>
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnlogin"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/login"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:layout_marginTop="20dp"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_gravity="center"
@@ -73,19 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btnlogin"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:text="@string/login"
-            android:textSize="20sp"
-            android:textStyle="italic"
-            android:layout_marginTop="20dp"
-            android:textColor="@android:color/white"
-            android:background="@color/colorPrimary"
-            android:textAllCaps="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
 </layout>

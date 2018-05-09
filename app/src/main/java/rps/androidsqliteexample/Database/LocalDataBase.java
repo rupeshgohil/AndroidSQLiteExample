@@ -26,6 +26,7 @@ import static rps.androidsqliteexample.Utility.databaseconfig.TABLENAME;
 import static rps.androidsqliteexample.Utility.databaseconfig.USERNAME;
 import static rps.androidsqliteexample.Utility.databaseconfig.getAllRecords;
 import static rps.androidsqliteexample.Utility.databaseconfig.Count;
+import static rps.androidsqliteexample.Utility.utility.ITEMPOS;
 
 public class LocalDataBase extends SQLiteOpenHelper{
 
@@ -137,5 +138,51 @@ public class LocalDataBase extends SQLiteOpenHelper{
             return false;
         }
         return true;
+    }
+
+    public int DeleleRecords(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int d_response = db.delete(TABLENAME,ID + " = ?",new String[]{String.valueOf(id)});
+        return d_response;
+    }
+
+    public Contact GetSingleRecords(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLENAME, new String[] { ID,
+                        USERNAME, GENDER, EMAIL,MOBILE,DATE,CITY,PASSWORD,IMAGE }, ID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Contact contact = new Contact();
+        contact.setId(Integer.parseInt(cursor.getString(0)));
+        contact.setUsername(cursor.getString(1));
+        contact.setGender(cursor.getString(2));
+        contact.setEmail(cursor.getString(3));
+        contact.setMobile(cursor.getString(4));
+        contact.setDate(cursor.getString(5));
+        contact.setCity(cursor.getString(6));
+        contact.setPassword(cursor.getString(7));
+        contact.setImage(cursor.getBlob(8));
+        cursor.close();
+        db.close();
+        return contact;
+
+    }
+
+    public int UpdateRecords(Contact mContact) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(USERNAME,mContact.getUsername());
+        values.put(GENDER,mContact.getGender());
+        values.put(EMAIL,mContact.getEmail());
+        values.put(MOBILE,mContact.getMobile());
+        values.put(DATE,mContact.getDate());
+        values.put(CITY,mContact.getCity());
+        values.put(PASSWORD,mContact.getPassword());
+        values.put(IMAGE,mContact.getImage());
+        int u_res = db.update(TABLENAME,values,ID + " = ?",new String[]{String.valueOf(ITEMPOS)});
+        return u_res;
     }
 }

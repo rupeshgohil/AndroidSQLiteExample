@@ -2,6 +2,7 @@ package rps.androidsqliteexample;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -20,7 +21,7 @@ import rps.androidsqliteexample.Database.LocalDataBase;
 import rps.androidsqliteexample.Interface.onClick;
 import rps.androidsqliteexample.Modal.Contact;
 import rps.androidsqliteexample.databinding.ActivityViewBinding;
-
+import static rps.androidsqliteexample.Utility.utility.ITEMPOS;
 import static rps.androidsqliteexample.Utility.databaseconfig.Count;
 
 public class ActivityView extends BaseActivity {
@@ -34,7 +35,7 @@ public class ActivityView extends BaseActivity {
         mActivityViewBinding = DataBindingUtil.setContentView(this,R.layout.activity_view);
         db = new LocalDataBase(this);
         arrayList =  db.GetAllRecords();
-        Log.e("array===>","===>"+new Gson().toJson(arrayList));
+        Log.e("array===>","===>"+new Gson().toJson(arrayList)+"SizeArray"+arrayList.size());
         mActivityViewBinding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         mActivityViewBinding.recyclerview.setHasFixedSize(false);
         mActivityViewBinding.recyclerview.addItemDecoration(new DividerItemDecoration(ActivityView.this,1));
@@ -49,8 +50,8 @@ public class ActivityView extends BaseActivity {
         mAdapter = new LocalContactAdapter(ActivityView.this,arrayList);
         mAdapter.setListener(new onClick() {
             @Override
-            public void onItemClick(int position) {
-                    Contact mc = arrayList.get(position);
+            public void onItemClick(final int position) {
+                    final Contact mc = arrayList.get(position);
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(ActivityView.this);
                 dialog.setTitle(mc.getUsername());
@@ -58,13 +59,22 @@ public class ActivityView extends BaseActivity {
                 dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(),"delete",Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getApplicationContext(),"delete",Toast.LENGTH_SHORT).show();
+                        int d_response = db.DeleleRecords(mc.getId());
+                        ITEMPOS = position;
+                        arrayList.remove(position);
+                        mAdapter.notifyDataSetChanged();
                     }
                 });
                 dialog.setNegativeButton("Update", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(),"update",Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getApplicationContext(),"update",Toast.LENGTH_SHORT).show();
+                       Contact mContact =  db.GetSingleRecords(mc.getId());
+                        Toast.makeText(getApplicationContext(),mContact.getUsername(),Toast.LENGTH_SHORT).show();
+                        Intent update = new Intent(ActivityView.this,ActivitySignup.class);
+                        update.putExtra("updatemodal",mContact);
+                        startActivity(update);
                     }
                 });
 

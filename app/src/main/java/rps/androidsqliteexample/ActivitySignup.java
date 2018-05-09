@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -47,12 +48,55 @@ public class ActivitySignup extends BaseActivity {
     public static String SelectDate;
     AlertDialog.Builder dialogBuilder;
     AlertDialog mDialog;
+    Intent mIntent;
+    Contact mContact;
+    Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        mActivitySignupBinding = DataBindingUtil.setContentView(this, R.layout.activity_signup);
        db = new LocalDataBase(this);
        mContext = this;
+       mIntent = getIntent();
+       mContact = (Contact) mIntent.getSerializableExtra("updatemodal");
+       if(mContact != null){
+           Log.e("CallIntent","CallIntent");
+           mActivitySignupBinding.edUserName.setText(mContact.getUsername());
+//           Log.e("getUsername======>",mContact.getUsername());
+           mActivitySignupBinding.edEmail.setText(mContact.getEmail());
+//           Log.e("getEmail======>",mContact.getEmail());
+           mActivitySignupBinding.edCity.setText(mContact.getCity());
+//           Log.e("getCity======>",mContact.getCity());
+           mActivitySignupBinding.edMobile.setText(mContact.getMobile());
+//           Log.e("getMobile======>",mContact.getMobile());
+           mActivitySignupBinding.edDate.setText(mContact.getDate());
+//           Log.e("getDate======>",mContact.getDate());
+           mActivitySignupBinding.edPassword.setText(mContact.getPassword());
+//           Log.e("getPassword======>",mContact.getPassword());
+           mActivitySignupBinding.edCPassword.setText(mContact.getPassword());
+//           Log.e("getPassword======>",mContact.getPassword());
+//           Log.e("getGender======>",mContact.getGender());
+           bitmap = BitmapFactory.decodeByteArray(mContact.getImage(), 0, (mContact.getImage().length));
+           mActivitySignupBinding.profileImage.setImageBitmap(bitmap);
+           if(mContact.getGender().equals("Male")){
+               RadioButton mbtn = (RadioButton)findViewById(R.id.rbMale);
+               mbtn.setChecked(true);
+           }else{
+               RadioButton mbtn = (RadioButton)findViewById(R.id.rbFemale);
+               mbtn.setChecked(true);
+           }
+           mActivitySignupBinding.btnsubmit.setVisibility(View.GONE);
+           mActivitySignupBinding.btUpdate.setVisibility(View.VISIBLE);
+       }
+        mActivitySignupBinding.btUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int u_res = db.UpdateRecords(mContact);
+                if(u_res == 1){
+                    Toast.makeText(ActivitySignup.this, "UpdateSucess", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
        mActivitySignupBinding.radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
            @Override
            public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -81,6 +125,7 @@ public class ActivitySignup extends BaseActivity {
                        Toast.makeText(mContext, "Fail", Toast.LENGTH_SHORT).show();
                    }else{
                        Log.e("insert","InsertSucess");
+                       Log.e("insertRecords",String.valueOf(insertResponse));
                        Toast.makeText(mContext, "Insert Success", Toast.LENGTH_SHORT).show();
                        Intent i = new Intent(ActivitySignup.this,MainActivity.class);
                        startActivity(i);

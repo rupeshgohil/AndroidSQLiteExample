@@ -11,6 +11,7 @@ public class utility {
     public static final int REQUEST_CAMERA=2;
     public static final int SELECT_FILE=1;
     public static final String SELECTIMAGE="Select File";
+    public static  int ITEMPOS = 0;
 
 
 }
