@@ -114,6 +114,7 @@ public class GpsLocation extends Service implements LocationListener {
     public String getLocationAddress() {
 
         if (isLocationAvailable) {
+
             Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
             List<Address> addresses = null;
             try {
@@ -131,8 +132,8 @@ public class GpsLocation extends Service implements LocationListener {
                 return errorString;
             }
             if (addresses != null && addresses.size() > 0) {
-                   Address address = addresses.get(0);
-                   /* String addressText = String.format(
+                  /* Address address = addresses.get(0);
+                    String addressText = String.format(
                         "%s, %s, %s",
                         // If there's a street address, add it
                         address.getMaxAddressLineIndex() > 0 ? address
